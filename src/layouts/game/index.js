@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Previous from "./Previous";
 import Memorizing from "./Memorizing";
@@ -33,6 +33,8 @@ export default function Game() {
                 return 20
             case "hard":
                 return 30
+            default:
+                return "easy"
         }
     }
     const pointsPerWin = getPointsPerWin()
@@ -83,8 +85,8 @@ export default function Game() {
             alignItems="center"
             gap={4}
             p={2}
-        > 
-            Current game points: {points}
+        >
+            <Typography variant="h4" component="h4">Current game points: {points}</Typography>
             {gameStatus === gameStatuses.previous && <Previous difficulty={difficulty} setDifficulty={setDifficulty} setGameStatus={setGameStatus} />}
             {gameStatus === gameStatuses.memorizing && <Memorizing seconds={seconds} setGameStatus={setGameStatus} randomNumbers={randomNumbers} gameResult={gameResult} gameStatus={gameStatus} />}
             {gameStatus === gameStatuses.playing && <Playing gameResult={gameResult} chosenNumber={chosenNumber} solutionNumber={solutionNumber} randomNumbers={randomNumbers} chooseNumber={chooseNumber} gameStatus={gameStatus} />}
