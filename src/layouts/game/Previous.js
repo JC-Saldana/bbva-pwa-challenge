@@ -10,6 +10,7 @@ export default function Previous({ difficulty, setDifficulty, setGameStatus }) {
         display="flex"
         justifyContent="space-between"
     >
+        <Button variant="contained" onClick={() => setGameStatus(gameStatuses.memorizing)}>Start</Button>
         <Select
             value={difficulty}
             onChange={handleDifficultyChange}
@@ -18,6 +19,5 @@ export default function Previous({ difficulty, setDifficulty, setGameStatus }) {
             <MenuItem value={gameDifficulties.medium}>Medium</MenuItem>
             <MenuItem value={gameDifficulties.hard}>Hard</MenuItem>
         </Select>
-        <Button variant="contained" onClick={() => setGameStatus(gameStatuses.memorizing)}>Start</Button>
     </Box>
 }

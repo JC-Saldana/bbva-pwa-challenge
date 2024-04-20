@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Previous from "./Previous";
 import Memorizing from "./Memorizing";
 import Playing from "./Playing";
@@ -45,7 +45,10 @@ export default function Game() {
     }, []);
 
     const [solutionNumber, setSolutionNumber] = useState(0);
-    const generateRandomNumber = () => setSolutionNumber(randomNumbers[Math.floor(Math.random() * randomNumbers.length)])
+    const generateRandomNumber = useCallback(() => {
+        setSolutionNumber(randomNumbers[Math.floor(Math.random() * randomNumbers.length)])
+    }, []);
+
 
     useEffect(() => {
         generateRandomNumber()
