@@ -1,8 +1,10 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useMyHook } from '../../context';
 
 export default function Home() {
+    const { saveName } = useMyHook(null);
     const navigate = useNavigate();
     const [name, setName] = useState("")
     const [error, setError] = useState(false)
@@ -10,7 +12,7 @@ export default function Home() {
         setName(e.target.value)
     }
     const handleClick = () => {
-        localStorage.setItem("name", name);
+        saveName(name)
         if (name) navigate("/game");
         else setError(true)
     }

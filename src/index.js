@@ -6,11 +6,14 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { MyHookProvider } from './context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Header />
-    <App />
+    <MyHookProvider>
+      <Header />
+      <App />
+    </MyHookProvider>
   </React.StrictMode>
 )
