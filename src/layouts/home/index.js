@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
     const navigate = useNavigate();
     const [name, setName] = useState("")
+    const [error, setError] = useState(false)
     const handleNameChange = e => {
         setName(e.target.value)
     }
     const handleClick = e => {
         if (name) navigate("/game");
-        else alert("No name")
+        else setError(true)
     }
     return (
 
@@ -22,7 +23,7 @@ export default function Home() {
             gap={4}
             p={2}
         >
-            <TextField id="standard-basic" label="Name" variant="standard" value={name} onChange={handleNameChange} />
+            <TextField id="standard-basic" label="Name" variant="standard" value={name} onChange={handleNameChange} error={error} helperText={error && "Required"} />
             <Button variant="contained" onClick={handleClick}>Start</Button>
         </Box>
     )
