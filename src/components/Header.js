@@ -15,9 +15,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Hello Carlos. 20 points'];
 
 export default function Header(props) {
+  const name = localStorage.getItem("name");
+  const navItems = [name];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 

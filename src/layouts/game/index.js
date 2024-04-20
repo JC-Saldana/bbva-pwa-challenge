@@ -10,6 +10,7 @@ export default function Game() {
     const [gameStatus, setGameStatus] = useState(gameStatuses.previous)
     const [gameResult, setGameResult] = useState(gameResults.pending)
     const [difficulty, setDifficulty] = useState(gameDifficulties.easy)
+    const [points, setPoints] = useState(0)
     const [chosenNumber, setChosenNumber] = useState(0)
     const getSeconds = () => {
         switch (difficulty) {
@@ -24,7 +25,17 @@ export default function Game() {
         }
     }
     const seconds = getSeconds()
-
+    const getPointsPerWin = () => {
+        switch (difficulty) {
+            case "easy":
+                return 10
+            case "medium":
+                return 20
+            case "hard":
+                return 30
+        }
+    }
+    const pointsPerWin = getPointsPerWin()
     // Generate random numbers memoized to prevent recalculation on every render
     const randomNumbers = useMemo(() => {
         const numbers = Array.from({ length: 9 }, (_, index) => index + 1);
@@ -55,8 +66,10 @@ export default function Game() {
         setChosenNumber(chosenNumber)
         if (solutionNumber === chosenNumber) {
             setGameResult(gameResults.won)
+            setPoints(prevPoints => prevPoints + pointsPerWin)
         } else {
             setGameResult(gameResults.lost)
+            setPoints(0)
         }
         setTimeout(() => cleanState(), 2000);
     }
@@ -70,8 +83,8 @@ export default function Game() {
             alignItems="center"
             gap={4}
             p={2}
-        >
-            {gameResult}
+        > 
+            Current game points: {points}
             {gameStatus === gameStatuses.previous && <Previous difficulty={difficulty} setDifficulty={setDifficulty} setGameStatus={setGameStatus} />}
             {gameStatus === gameStatuses.memorizing && <Memorizing seconds={seconds} setGameStatus={setGameStatus} randomNumbers={randomNumbers} gameResult={gameResult} gameStatus={gameStatus} />}
             {gameStatus === gameStatuses.playing && <Playing gameResult={gameResult} chosenNumber={chosenNumber} solutionNumber={solutionNumber} randomNumbers={randomNumbers} chooseNumber={chooseNumber} gameStatus={gameStatus} />}

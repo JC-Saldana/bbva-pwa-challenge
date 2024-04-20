@@ -9,7 +9,8 @@ export default function Home() {
     const handleNameChange = e => {
         setName(e.target.value)
     }
-    const handleClick = e => {
+    const handleClick = () => {
+        localStorage.setItem("name", name);
         if (name) navigate("/game");
         else setError(true)
     }
