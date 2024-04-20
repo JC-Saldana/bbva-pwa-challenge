@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import NumberButton from "./NumberButton";
-import { useState } from "react";
 
 export default function Cards({ chosenNumber, solutionNumber, randomNumbers, chooseNumber, gameResult, gameStatus }) {
 
