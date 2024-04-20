@@ -19,6 +19,8 @@ export default function Game() {
                 return 5
             case "hard":
                 return 2
+            default:
+                return 10
         }
     }
     /* const getPointsPerWin = () => {
@@ -47,7 +49,7 @@ export default function Game() {
 
     useEffect(() => {
         generateRandomNumber()
-    }, [])
+    }, [generateRandomNumber])
 
     const cleanState = () => {
         generateRandomNumber()
