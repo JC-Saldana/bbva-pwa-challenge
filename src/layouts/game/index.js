@@ -23,18 +23,9 @@ export default function Game() {
                 return 10
         }
     }
-    /* const getPointsPerWin = () => {
-        switch (difficulty) {
-            case "easy":
-                return 10
-            case "medium":
-                return 20
-            case "hard":
-                return 30
-        }
-    } */
     const seconds = getSeconds()
-    /*   const pointsPerWin = getPointsPerWin() */
+
+    // Generate random numbers memoized to prevent recalculation on every render
     const randomNumbers = useMemo(() => {
         const numbers = Array.from({ length: 9 }, (_, index) => index + 1);
         for (let i = numbers.length - 1; i > 0; i--) {
@@ -47,8 +38,7 @@ export default function Game() {
     const [solutionNumber, setSolutionNumber] = useState(0);
     const generateRandomNumber = useCallback(() => {
         setSolutionNumber(randomNumbers[Math.floor(Math.random() * randomNumbers.length)])
-    }, []);
-
+    }, [randomNumbers]); // Include randomNumbers in the dependency array
 
     useEffect(() => {
         generateRandomNumber()
