@@ -63,7 +63,7 @@ export default function Game() {
 
     useEffect(() => {
         generateRandomNumbers();
-    }, [requiredBoxes]); // Ensure random numbers are generated whenever requiredBoxes changes
+    }, [requiredBoxes, generateRandomNumbers]); // Ensure random numbers are generated whenever requiredBoxes changes
 
     useEffect(() => {
         let interval;
@@ -80,7 +80,7 @@ export default function Game() {
             }, 1000);
         }
         return () => clearInterval(interval);
-    }, [gameStatus, randomNumbers, movement, seconds]);
+    }, [gameStatus, randomNumbers, movement, seconds, swapRandomNumbers]);
 
     const cleanState = () => {
         generateRandomNumbers()
