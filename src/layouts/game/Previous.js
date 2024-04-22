@@ -15,7 +15,7 @@ export default function Previous({ seconds, setSeconds, setGameStatus, requiredB
         alignItems="space-around"
     >
         <Box display="flex" justifyContent="space-evenly" gap="12px" flexWrap="wrap">
-            <FormControl style={{ minWidth: 104 }}>
+            <FormControl variant="standard" style={{ minWidth: 104 }}>
                 <InputLabel id="seconds-select">Seconds</InputLabel>
                 <Select
                     labelId="seconds-select"
@@ -27,7 +27,7 @@ export default function Previous({ seconds, setSeconds, setGameStatus, requiredB
                     <MenuItem value={gameSeconds[9]}>{gameSeconds[9]}</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl style={{ minWidth: 104 }}>
+            <FormControl variant="standard" style={{ minWidth: 104 }}>
                 <InputLabel id="boxes-select">Boxes</InputLabel>
                 <Select
                     labelId="boxes-select"
@@ -40,7 +40,7 @@ export default function Previous({ seconds, setSeconds, setGameStatus, requiredB
                     <MenuItem value={gameRequiredBoxes[16]}>16</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl style={{ minWidth: 104 }}>
+            <FormControl variant="standard" style={{ minWidth: 104 }}>
                 <InputLabel id="movement-select">Movement</InputLabel>
                 <Select
                     labelId="movement-select"
