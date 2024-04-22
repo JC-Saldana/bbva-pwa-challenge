@@ -59,7 +59,7 @@ export default function Game() {
         const newRandomNumbers = swapRandomElements(randomNumbers)
         setRandomNumbers(newRandomNumbers)
         setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)])
-    }, [newRandomNumbers]);
+    }, [randomNumbers]);
 
     useEffect(() => {
         generateRandomNumbers();
