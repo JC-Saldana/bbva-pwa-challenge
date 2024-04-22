@@ -5,6 +5,8 @@ import Memorizing from "./Memorizing";
 import Playing from "./Playing";
 import { gameMovements, gameRequiredBoxes, gameResults, gameSeconds, gameStatuses } from "../../constants";
 import { getPointsPerWin } from "./utils/getPointsPerWin";
+import { generateRandomNumbers } from "./utils/generateRandomNumbers";
+import { pickRandomElement } from "./utils/pickRandomElement";
 
 export default function Game() {
 
@@ -19,22 +21,15 @@ export default function Game() {
     const [solutionNumber, setSolutionNumber] = useState(0);
     const pointsPerWin = getPointsPerWin(seconds, requiredBoxes, movement)
 
-    const generateRandomNumbers = useCallback(() => {
-        const numbers = Array.from({ length: requiredBoxes }, (_, index) => index + 1);
-        for (let i = numbers.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-        }
-        const newRandomNumbers = numbers.slice(0, requiredBoxes);
+    const applyRandomNumbers = useCallback(() => {
+       const newRandomNumbers = generateRandomNumbers(requiredBoxes)
+       const randomElement = pickRandomElement(newRandomNumbers)
         setRandomNumbers(newRandomNumbers)
-        setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)])
+        setSolutionNumber(randomElement)
     }, [requiredBoxes]);
 
     function swapRandomElements(array) {
-        if (array.length < 2) {
-            console.error("Array must contain at least two elements.");
-            return array.slice(); // Return a copy of the original array
-        }
+        if (array.length < 2) return array.slice()
 
         var index1 = Math.floor(Math.random() * array.length);
         var index2 = Math.floor(Math.random() * array.length);
@@ -62,8 +57,8 @@ export default function Game() {
     }, [randomNumbers]);
 
     useEffect(() => {
-        generateRandomNumbers();
-    }, [requiredBoxes, generateRandomNumbers]); // Ensure random numbers are generated whenever requiredBoxes changes
+        applyRandomNumbers();
+    }, [requiredBoxes, applyRandomNumbers]); // Ensure random numbers are generated whenever requiredBoxes changes
 
     useEffect(() => {
         let interval;
@@ -104,7 +99,7 @@ export default function Game() {
     return (
         <Box
             m={"auto"}
-            width="500px"
+            maxWidth="500px"
             display="flex"
             flexDirection="column"
             alignItems="center"
