@@ -1,6 +1,6 @@
-import { gameRequiredBoxes, gameSeconds } from "../../../constants";
+import { gameMovements, gameRequiredBoxes, gameSeconds } from "../../../constants";
 
-export const getPointsPerWin = (seconds, requiredBoxes) => {
+export const getPointsPerWin = (seconds, requiredBoxes, movement) => {
     let addedPoints = 0
     switch (seconds) {
         case gameSeconds[3]:
@@ -31,6 +31,17 @@ export const getPointsPerWin = (seconds, requiredBoxes) => {
             break;
         default:
             addedPoints += 40
+            break;
+    }
+    switch (movement) {
+        case gameMovements.true:
+            addedPoints += 30
+            break;
+        case gameMovements.false:
+            addedPoints += 0
+            break;
+        default:
+            addedPoints += 0
             break;
     }
     return addedPoints

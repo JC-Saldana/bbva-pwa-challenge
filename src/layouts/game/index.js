@@ -17,7 +17,7 @@ export default function Game() {
     const [chosenNumber, setChosenNumber] = useState(0)
     const [randomNumbers, setRandomNumbers] = useState([])
     const [solutionNumber, setSolutionNumber] = useState(0);
-    const pointsPerWin = getPointsPerWin(seconds, requiredBoxes)
+    const pointsPerWin = getPointsPerWin(seconds, requiredBoxes, movement)
 
     const generateRandomNumbers = useCallback(() => {
         const numbers = Array.from({ length: requiredBoxes }, (_, index) => index + 1);
