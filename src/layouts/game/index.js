@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Previous from "./Previous";
 import Memorizing from "./Memorizing";
 import Playing from "./Playing";
@@ -19,7 +19,7 @@ export default function Game() {
     const [solutionNumber, setSolutionNumber] = useState(0);
     const pointsPerWin = getPointsPerWin(seconds, requiredBoxes)
 
-    const generateRandomNumbers = () => {
+    const generateRandomNumbers = useCallback(() => {
         const numbers = Array.from({ length: requiredBoxes }, (_, index) => index + 1);
         for (let i = numbers.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -28,7 +28,8 @@ export default function Game() {
         const newRandomNumbers = numbers.slice(0, requiredBoxes);
         setRandomNumbers(newRandomNumbers)
         setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)])
-    }
+    }, [requiredBoxes]);
+
     function swapRandomElements(array) {
         if (array.length < 2) {
             console.error("Array must contain at least two elements.");
@@ -54,12 +55,11 @@ export default function Game() {
         return newArray;
     }
 
-    const swapRandomNumbers = () => {
+    const swapRandomNumbers = useCallback(() => {
         const newRandomNumbers = swapRandomElements(randomNumbers)
         setRandomNumbers(newRandomNumbers)
         setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)])
-    }
-
+    }, []);
 
     useEffect(() => {
         generateRandomNumbers();
