@@ -4,7 +4,7 @@ import NumberButton from "./NumberButton";
 export default function Cards({ chosenNumber, solutionNumber, randomNumbers, chooseNumber, gameResult, gameStatus }) {
     return (
         <Box
-            width={300}
+            maxWidth={300}
             my={2}
             display="flex"
             flexWrap="wrap"

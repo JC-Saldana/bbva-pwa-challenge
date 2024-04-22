@@ -7,15 +7,14 @@ export default function Previous({ seconds, setSeconds, setGameStatus, requiredB
     const handleRequiredBoxesChange = e => setRequiredBoxes(e.target.value)
     const handleMovementChange = e => setMovement(e.target.value)
     return <Box
-        width="400px"
+        maxWidth="400px"
         height="124px"
         display="flex"
         flexDirection="column"
         justifyContent="space-around"
         alignItems="space-around"
     >
-        <Box display="flex"
-            justifyContent="space-evenly">
+        <Box display="flex" justifyContent="space-evenly" gap="12px" flexWrap="wrap">
             <FormControl style={{ minWidth: 104 }}>
                 <InputLabel id="seconds-select">Seconds</InputLabel>
                 <Select
@@ -53,7 +52,7 @@ export default function Previous({ seconds, setSeconds, setGameStatus, requiredB
                 </Select>
             </FormControl>
         </Box>
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" mt={1}>
             <Button variant="contained" onClick={() => setGameStatus(gameStatuses.memorizing)}>Start</Button>
         </Box>
     </Box>
