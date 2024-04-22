@@ -1,0 +1,9 @@
+version: '1.0'
+
+services:
+  game:
+    build:
+      dockerfile: Dockerfile
+    container_name: back
+    ports:
+      - 3000:3000
