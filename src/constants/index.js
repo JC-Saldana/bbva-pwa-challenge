@@ -24,6 +24,6 @@ export const gameRequiredBoxes = {
 }
 
 export const gameMovements = {
-    yes: "yes",
-    no: "no"
+    true: "yes",
+    false: "false"
 }

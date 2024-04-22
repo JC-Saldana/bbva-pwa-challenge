@@ -12,7 +12,7 @@ export default function Game() {
     const [gameResult, setGameResult] = useState(gameResults.pending)
     const [seconds, setSeconds] = useState(gameSeconds[6])
     const [requiredBoxes, setRequiredBoxes] = useState(gameRequiredBoxes[9])
-    const [movement, setMovement] = useState(gameMovements.yes)
+    const [movement, setMovement] = useState(gameMovements.true)
     const [points, setPoints] = useState(0)
     const [chosenNumber, setChosenNumber] = useState(0)
     const [randomNumbers, setRandomNumbers] = useState([])
@@ -29,10 +29,58 @@ export default function Game() {
         setRandomNumbers(newRandomNumbers)
         setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)])
     }
+    function swapRandomElements(array) {
+        if (array.length < 2) {
+            console.error("Array must contain at least two elements.");
+            return array.slice(); // Return a copy of the original array
+        }
+
+        var index1 = Math.floor(Math.random() * array.length);
+        var index2 = Math.floor(Math.random() * array.length);
+
+        // Ensure index2 is different from index1
+        while (index2 === index1) {
+            index2 = Math.floor(Math.random() * array.length);
+        }
+
+        // Create a copy of the original array to avoid modifying it directly
+        var newArray = array.slice();
+
+        // Swap the elements in the new array
+        var temp = newArray[index1];
+        newArray[index1] = newArray[index2];
+        newArray[index2] = temp;
+
+        return newArray;
+    }
+
+    const swapRandomNumbers = () => {
+        const newRandomNumbers = swapRandomElements(randomNumbers)
+        setRandomNumbers(newRandomNumbers)
+        setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)])
+    }
+
 
     useEffect(() => {
-        generateRandomNumbers()
-    }, [])
+        generateRandomNumbers();
+    }, [requiredBoxes]); // Ensure random numbers are generated whenever requiredBoxes changes
+
+    useEffect(() => {
+        let interval;
+        let elapsedSeconds = 0;
+        if (gameStatus === gameStatuses.memorizing && randomNumbers.length > 0 && movement === gameMovements.true) {
+            console.log("here")
+            // Swap random numbers continuously
+            interval = setInterval(() => {
+                swapRandomNumbers();
+                elapsedSeconds++;
+                if (elapsedSeconds >= seconds) {
+                    clearInterval(interval); // Clear the interval after reaching the specified duration
+                }
+            }, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [gameStatus, randomNumbers, movement, seconds]);
 
     const cleanState = () => {
         generateRandomNumbers()

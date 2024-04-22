@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { gameResults, gameStatuses } from "../../../constants";
+import "./styles.css"
 
 export default function NumberButton({ gameResult, chosenNumber, solutionNumber, buttonNumber, chooseNumber, gameStatus }) {
     const getButtonColor = () => {
@@ -19,7 +20,9 @@ export default function NumberButton({ gameResult, chosenNumber, solutionNumber,
         color={getButtonColor()}
         onClick={() => chooseNumber(buttonNumber)}
         variant="contained"
-        style={{ height: '64px' }}>
+        style={{ height: '64px' }}
+        className="scale-in-center"
+        >
         {getButtonContent()}
     </Button>
 }
