@@ -78,7 +78,7 @@ export default function Game() {
     }, [gameStatus, randomNumbers, movement, seconds, swapRandomNumbers]);
 
     const cleanState = () => {
-        generateRandomNumbers()
+        applyRandomNumbers()
         setGameStatus(gameStatuses.previous)
         setGameResult(gameResults.pending)
         setChosenNumber(0)
