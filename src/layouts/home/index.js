@@ -26,7 +26,15 @@ export default function Home() {
             gap={4}
             p={2}
         >
-            <TextField id="standard-basic" label="Name" variant="standard" value={name} onChange={handleNameChange} error={error} helperText={error && "Required"} />
+            <TextField
+                id="standard-basic"
+                label="Name"
+                variant="standard"
+                value={name}
+                onChange={handleNameChange}
+                error={error}
+                helperText={error && "Required"}
+            />
             <Button variant="contained" onClick={handleClick}>Login</Button>
         </Box>
     )

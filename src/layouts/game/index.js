@@ -7,6 +7,7 @@ import { gameMovements, gameRequiredBoxes, gameResults, gameSeconds, gameStatuse
 import { getPointsPerWin } from "./utils/getPointsPerWin";
 import { generateRandomNumbers } from "./utils/generateRandomNumbers";
 import { pickRandomElement } from "./utils/pickRandomElement";
+import { swapRandomElements } from "./utils/swapRandomElements";
 
 export default function Game() {
 
@@ -22,33 +23,11 @@ export default function Game() {
     const pointsPerWin = getPointsPerWin(seconds, requiredBoxes, movement)
 
     const applyRandomNumbers = useCallback(() => {
-       const newRandomNumbers = generateRandomNumbers(requiredBoxes)
-       const randomElement = pickRandomElement(newRandomNumbers)
+        const newRandomNumbers = generateRandomNumbers(requiredBoxes)
+        const randomElement = pickRandomElement(newRandomNumbers)
         setRandomNumbers(newRandomNumbers)
         setSolutionNumber(randomElement)
     }, [requiredBoxes]);
-
-    function swapRandomElements(array) {
-        if (array.length < 2) return array.slice()
-
-        var index1 = Math.floor(Math.random() * array.length);
-        var index2 = Math.floor(Math.random() * array.length);
-
-        // Ensure index2 is different from index1
-        while (index2 === index1) {
-            index2 = Math.floor(Math.random() * array.length);
-        }
-
-        // Create a copy of the original array to avoid modifying it directly
-        var newArray = array.slice();
-
-        // Swap the elements in the new array
-        var temp = newArray[index1];
-        newArray[index1] = newArray[index2];
-        newArray[index2] = temp;
-
-        return newArray;
-    }
 
     const swapRandomNumbers = useCallback(() => {
         const newRandomNumbers = swapRandomElements(randomNumbers)
@@ -64,7 +43,6 @@ export default function Game() {
         let interval;
         let elapsedSeconds = 0;
         if (gameStatus === gameStatuses.memorizing && randomNumbers.length > 0 && movement === gameMovements.true) {
-            console.log("here")
             // Swap random numbers continuously
             interval = setInterval(() => {
                 swapRandomNumbers();
