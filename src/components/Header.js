@@ -14,7 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useMyHook } from '../context';
-import { database } from '../services/indexedDB';
+import { useScoreHook } from '../context/scoreContext';
 
 const drawerWidth = 240;
 
@@ -28,19 +28,8 @@ export default function Header(props) {
 
   const { name } = useMyHook(null);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [maxScore, setMaxScore] = React.useState(0)
-  const navItems = [name, `Max score: ${maxScore}`];
-
-  const getMaxScore = async () => {
-    const dbItems = await database.getAllItems();
-    const scores = dbItems.map(item => item.score)
-    const maxScoreFromDb = Math.max(...scores)?.length || 0
-    setMaxScore(maxScoreFromDb)
-  }
-
-  React.useEffect(() => {
-    getMaxScore()
-  }, [])
+  const { score } = useScoreHook(null)
+  const navItems = [name, `Max score: ${score}`];
 
   /**
    * Toggles the mobile drawer open/close state.

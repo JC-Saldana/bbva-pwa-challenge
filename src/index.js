@@ -7,13 +7,16 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { MyHookProvider } from './context';
+import { ScoreHookProvider } from './context/scoreContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MyHookProvider>
-      <Header />
-      <App />
+      <ScoreHookProvider>
+        <Header />
+        <App />
+      </ScoreHookProvider>
     </MyHookProvider>
   </React.StrictMode>
 )

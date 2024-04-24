@@ -1,16 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-/**
- * Context object for the custom hook.
- * @type {React.Context<{ name: string, saveName: Function }>}
- */
 const MyContext = React.createContext();
 
-/**
- * Custom hook for managing a name state with localStorage persistence.
- * @param {string} initName - Initial name value.
- * @returns {{ name: string, saveName: Function }} Object containing name state and saveName function.
- */
 const useMyHookEffect = (initName) => {
   /**
    * State for the name.
@@ -35,13 +26,6 @@ const useMyHookEffect = (initName) => {
   return { name, saveName };
 };
 
-/**
- * Provider component that wraps the app and provides the custom hook's functionality.
- * @param {Object} props - Component props.
- * @param {React.ReactNode} props.children - Child components.
- * @param {string} props.name - Initial name value.
- * @returns {JSX.Element} JSX element representing the provider.
- */
 export function MyHookProvider({ children, name }) {
   /**
    * Custom hook effect result.

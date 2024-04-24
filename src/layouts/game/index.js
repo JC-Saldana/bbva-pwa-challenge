@@ -8,7 +8,7 @@ import { getPointsPerWin } from "./utils/getPointsPerWin";
 import { generateRandomNumbers } from "./utils/generateRandomNumbers";
 import { pickRandomElement } from "./utils/pickRandomElement";
 import { swapRandomElements } from "./utils/swapRandomElements";
-import { database } from "../../services/indexedDB";
+import { useScoreHook } from "../../context/scoreContext";
 
 /**
  * Component for the game.
@@ -25,7 +25,8 @@ export default function Game() {
     const [randomNumbers, setRandomNumbers] = useState([]);
     const [solutionNumber, setSolutionNumber] = useState(0);
     const pointsPerWin = getPointsPerWin(seconds, requiredBoxes, movement);
-
+    const { saveScore } = useScoreHook(null)
+    
     /**
      * Generates and applies random numbers to the game.
      */
@@ -73,11 +74,6 @@ export default function Game() {
         setGameResult(gameResults.pending);
         setChosenNumber(0);
     };
-
-    const saveScore = async score => {
-        const newItem = { score };
-        await database.addItem(newItem)
-    }
 
     /**
      * Handles choosing a number.
