@@ -2,6 +2,7 @@
 
 Welcome to the BBVA Cards Game – a React application designed to test your memory and concentration skills! This app was developed as part of the technical interview process for BBVA, providing a fun and interactive way to showcase my React proficiency.
 
+## Sonar status
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=JC-Saldana_bbva-pwa-challenge&metric=bugs)](https://sonarcloud.io/summary/new_code?id=JC-Saldana_bbva-pwa-challenge)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=JC-Saldana_bbva-pwa-challenge&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=JC-Saldana_bbva-pwa-challenge)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=JC-Saldana_bbva-pwa-challenge&metric=coverage)](https://sonarcloud.io/summary/new_code?id=JC-Saldana_bbva-pwa-challenge)
@@ -53,4 +54,4 @@ $ npm run start
 3. Navigate to the project directory:
 4. Build the Docker image:
 5. Run the Docker container:
-6. Open your web browser and navigate to [http://localhost:8080](http://localhost:8080) to start playing!
+6. Open your web browser and navigate to [http://localhost:3000](http://localhost:3000) to start playing!
