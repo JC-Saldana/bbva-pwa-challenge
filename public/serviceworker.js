@@ -1,9 +1,25 @@
+/**
+ * The name of the cache.
+ * @type {string}
+ */
 const CACHE_NAME = "version-1";
+
+/**
+ * URLs to cache.
+ * @type {Array<string>}
+ */
 const urlsToCache = ["index.html", "offline.html"];
 
+/**
+ * Reference to the global scope.
+ * @type {ServiceWorkerGlobalScope}
+ */
 const self = this;
 
-// Install SW
+/**
+ * Event listener for the 'install' event.
+ * @param {ExtendableEvent} e - The install event object.
+ */
 self.addEventListener("install", e => {
     e.waitUntil(
         caches.open(CACHE_NAME)
@@ -14,7 +30,10 @@ self.addEventListener("install", e => {
     );
 });
 
-// Listen for requests
+/**
+ * Event listener for the 'fetch' event.
+ * @param {FetchEvent} e - The fetch event object.
+ */
 self.addEventListener("fetch", e => {
     e.respondWith(
         caches.match(e.request)
@@ -47,7 +66,10 @@ self.addEventListener("fetch", e => {
     );
 });
 
-// Activate the SW
+/**
+ * Event listener for the 'activate' event.
+ * @param {ExtendableEvent} e - The activate event object.
+ */
 self.addEventListener("activate", e => {
     const cacheWhitelist = [CACHE_NAME];
     e.waitUntil(
@@ -56,7 +78,7 @@ self.addEventListener("activate", e => {
                 if (!cacheWhitelist.includes(cacheName)) {
                     return caches.delete(cacheName);
                 }
-                return null
+                return null;
             })
         ))
     );

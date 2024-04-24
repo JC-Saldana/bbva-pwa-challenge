@@ -9,70 +9,85 @@ import { generateRandomNumbers } from "./utils/generateRandomNumbers";
 import { pickRandomElement } from "./utils/pickRandomElement";
 import { swapRandomElements } from "./utils/swapRandomElements";
 
+/**
+ * Component for the game.
+ * @returns {JSX.Element} JSX element representing the game.
+ */
 export default function Game() {
-
-    const [gameStatus, setGameStatus] = useState(gameStatuses.previous)
-    const [gameResult, setGameResult] = useState(gameResults.pending)
-    const [seconds, setSeconds] = useState(gameSeconds[6])
-    const [requiredBoxes, setRequiredBoxes] = useState(gameRequiredBoxes[9])
-    const [movement, setMovement] = useState(gameMovements.true)
-    const [points, setPoints] = useState(0)
-    const [chosenNumber, setChosenNumber] = useState(0)
-    const [randomNumbers, setRandomNumbers] = useState([])
+    const [gameStatus, setGameStatus] = useState(gameStatuses.previous);
+    const [gameResult, setGameResult] = useState(gameResults.pending);
+    const [seconds, setSeconds] = useState(gameSeconds[6]);
+    const [requiredBoxes, setRequiredBoxes] = useState(gameRequiredBoxes[9]);
+    const [movement, setMovement] = useState(gameMovements.true);
+    const [points, setPoints] = useState(0);
+    const [chosenNumber, setChosenNumber] = useState(0);
+    const [randomNumbers, setRandomNumbers] = useState([]);
     const [solutionNumber, setSolutionNumber] = useState(0);
-    const pointsPerWin = getPointsPerWin(seconds, requiredBoxes, movement)
+    const pointsPerWin = getPointsPerWin(seconds, requiredBoxes, movement);
 
+    /**
+     * Generates and applies random numbers to the game.
+     */
     const applyRandomNumbers = useCallback(() => {
-        const newRandomNumbers = generateRandomNumbers(requiredBoxes)
-        const randomElement = pickRandomElement(newRandomNumbers)
-        setRandomNumbers(newRandomNumbers)
-        setSolutionNumber(randomElement)
+        const newRandomNumbers = generateRandomNumbers(requiredBoxes);
+        const randomElement = pickRandomElement(newRandomNumbers);
+        setRandomNumbers(newRandomNumbers);
+        setSolutionNumber(randomElement);
     }, [requiredBoxes]);
 
+    /**
+     * Swaps random elements continuously.
+     */
     const swapRandomNumbers = useCallback(() => {
-        const newRandomNumbers = swapRandomElements(randomNumbers)
-        setRandomNumbers(newRandomNumbers)
-        setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)])
+        const newRandomNumbers = swapRandomElements(randomNumbers);
+        setRandomNumbers(newRandomNumbers);
+        setSolutionNumber(newRandomNumbers[Math.floor(Math.random() * newRandomNumbers.length)]);
     }, [randomNumbers]);
 
     useEffect(() => {
         applyRandomNumbers();
-    }, [requiredBoxes, applyRandomNumbers]); // Ensure random numbers are generated whenever requiredBoxes changes
+    }, [requiredBoxes, applyRandomNumbers]);
 
     useEffect(() => {
         let interval;
         let elapsedSeconds = 0;
         if (gameStatus === gameStatuses.memorizing && randomNumbers.length > 0 && movement === gameMovements.true) {
-            // Swap random numbers continuously
             interval = setInterval(() => {
                 swapRandomNumbers();
                 elapsedSeconds++;
                 if (elapsedSeconds >= seconds) {
-                    clearInterval(interval); // Clear the interval after reaching the specified duration
+                    clearInterval(interval);
                 }
             }, 1000);
         }
         return () => clearInterval(interval);
     }, [gameStatus, randomNumbers, movement, seconds, swapRandomNumbers]);
 
+    /**
+     * Cleans the game state.
+     */
     const cleanState = () => {
-        applyRandomNumbers()
-        setGameStatus(gameStatuses.previous)
-        setGameResult(gameResults.pending)
-        setChosenNumber(0)
-    }
+        applyRandomNumbers();
+        setGameStatus(gameStatuses.previous);
+        setGameResult(gameResults.pending);
+        setChosenNumber(0);
+    };
 
+    /**
+     * Handles choosing a number.
+     * @param {number} chosenNumber - The chosen number.
+     */
     const chooseNumber = chosenNumber => {
-        setChosenNumber(chosenNumber)
+        setChosenNumber(chosenNumber);
         if (solutionNumber === chosenNumber) {
-            setGameResult(gameResults.won)
-            setPoints(prevPoints => prevPoints + pointsPerWin)
+            setGameResult(gameResults.won);
+            setPoints(prevPoints => prevPoints + pointsPerWin);
         } else {
-            setGameResult(gameResults.lost)
-            setPoints(0)
+            setGameResult(gameResults.lost);
+            setPoints(0);
         }
         setTimeout(() => cleanState(), 2000);
-    }
+    };
 
     return (
         <Box
@@ -112,5 +127,5 @@ export default function Game() {
                 gameStatus={gameStatus}
             />}
         </Box>
-    )
+    );
 }

@@ -15,18 +15,48 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useMyHook } from '../context';
 
+/**
+ * Width of the drawer when open.
+ * @type {number}
+ */
 const drawerWidth = 240;
 
+/**
+ * Header component.
+ * @param {Object} props - Component props.
+ * @param {Function} props.window - Window function.
+ * @returns {JSX.Element} JSX element representing the header.
+ */
 export default function Header(props) {
+  /**
+   * Name from the context.
+   * @type {string}
+   */
   const { name } = useMyHook(null);
+
+  /**
+   * Navigation items.
+   * @type {Array<string>}
+   */
   const navItems = [name];
-  const { window } = props;
+
+  /**
+   * State for mobile drawer open/close.
+   * @type {[boolean, Function]}
+   */
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  /**
+   * Toggles the mobile drawer open/close state.
+   */
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  /**
+   * Drawer JSX.
+   * @type {JSX.Element}
+   */
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -45,7 +75,11 @@ export default function Header(props) {
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  /**
+   * Container for the drawer.
+   * @type {Function|undefined}
+   */
+  const container = props.window !== undefined ? () => props.window().document.body : undefined;
 
   return (
     <>
@@ -100,4 +134,3 @@ export default function Header(props) {
     </>
   );
 }
-
