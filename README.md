@@ -29,7 +29,8 @@ Ready to test your memory skills? -> https://bbva-pwa-challenge.netlify.app/
 - **Service Workers**: Service workers are employed to enable offline support, ensuring that players can enjoy uninterrupted gameplay even without an active internet connection.
 - **EditorConfig**: The project includes an EditorConfig file to maintain consistent coding styles across different editors and IDEs. This tool emphasize the importance of consistent code structure and adherence to coding standards.
 - **Git Hooks (Husky)**: Git hooks are implemented using Husky to automate tasks such as code linting and testing before commits are made, ensuring that only high-quality code is pushed to the repository.
-- **Testing**: The project includes comprehensive unit tests and integration tests to ensure the reliability and stability of the application.
+- **Unit Testing**: The project includes comprehensive unit tests and integration tests to ensure the reliability and stability of the application.
+- **End to End Testing**: Test the whole application flow to ensure no bugs are being pushed to production and that least the core functionality keeps working.
 - **Lighthouse Score**: The app aims for a perfect Lighthouse score, adhering to best practices for web performance, accessibility, and SEO. Achieving a perfect score demonstrates a commitment to delivering a high-quality user experience.
 - **Github Actions**: Github Actions are used for continuous integration and deployment, automating the build, test, and deployment processes to streamline development workflows.
 - **Sonar**: Sonar is integrated into the project for code quality and security analysis, providing insights into potential issues and vulnerabilities in the codebase.
@@ -45,6 +46,16 @@ $ npm install
 ```bash
 # development
 $ npm run start
+```
+
+## Testing
+
+```bash
+# unit testing
+$ npm run ci:test
+
+# end to end
+$ npx cypress run
 ```
 
 ### Docker
