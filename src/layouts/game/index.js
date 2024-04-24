@@ -8,6 +8,7 @@ import { getPointsPerWin } from "./utils/getPointsPerWin";
 import { generateRandomNumbers } from "./utils/generateRandomNumbers";
 import { pickRandomElement } from "./utils/pickRandomElement";
 import { swapRandomElements } from "./utils/swapRandomElements";
+import { database } from "../../services/indexedDB";
 
 /**
  * Component for the game.
@@ -73,6 +74,11 @@ export default function Game() {
         setChosenNumber(0);
     };
 
+    const saveScore = async score => {
+        const newItem = { score };
+        await database.addItem(newItem)
+    }
+
     /**
      * Handles choosing a number.
      * @param {number} chosenNumber - The chosen number.
@@ -81,7 +87,12 @@ export default function Game() {
         setChosenNumber(chosenNumber);
         if (solutionNumber === chosenNumber) {
             setGameResult(gameResults.won);
-            setPoints(prevPoints => prevPoints + pointsPerWin);
+            setPoints(prevPoints => {
+                const updatedPoints = prevPoints + pointsPerWin
+                saveScore(updatedPoints)
+                return updatedPoints
+            });
+
         } else {
             setGameResult(gameResults.lost);
             setPoints(0);

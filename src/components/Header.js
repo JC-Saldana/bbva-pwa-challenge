@@ -14,11 +14,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useMyHook } from '../context';
+import { database } from '../services/indexedDB';
 
-/**
- * Width of the drawer when open.
- * @type {number}
- */
 const drawerWidth = 240;
 
 /**
@@ -28,23 +25,22 @@ const drawerWidth = 240;
  * @returns {JSX.Element} JSX element representing the header.
  */
 export default function Header(props) {
-  /**
-   * Name from the context.
-   * @type {string}
-   */
+
   const { name } = useMyHook(null);
-
-  /**
-   * Navigation items.
-   * @type {Array<string>}
-   */
-  const navItems = [name];
-
-  /**
-   * State for mobile drawer open/close.
-   * @type {[boolean, Function]}
-   */
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [maxScore, setMaxScore] = React.useState(0)
+  const navItems = [name, `Max score: ${maxScore}`];
+
+  const getMaxScore = async () => {
+    const dbItems = await database.getAllItems();
+    const scores = dbItems.map(item => item.score)
+    const maxScoreFromDb = Math.max(...scores) || 0
+    setMaxScore(maxScoreFromDb)
+  }
+
+  React.useEffect(() => {
+    getMaxScore()
+  }, [])
 
   /**
    * Toggles the mobile drawer open/close state.
@@ -53,10 +49,6 @@ export default function Header(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  /**
-   * Drawer JSX.
-   * @type {JSX.Element}
-   */
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -75,10 +67,6 @@ export default function Header(props) {
     </Box>
   );
 
-  /**
-   * Container for the drawer.
-   * @type {Function|undefined}
-   */
   const container = props.window !== undefined ? () => props.window().document.body : undefined;
 
   return (

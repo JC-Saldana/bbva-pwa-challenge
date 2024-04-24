@@ -29,6 +29,7 @@ Ready to test your memory skills? -> https://bbva-pwa-challenge.netlify.app/
 - **React**: The game is developed using React, a popular JavaScript library for building user interfaces. React's component-based architecture allows for easy management of game elements and state.
 - **Material-UI**: Material-UI is utilized for designing visually appealing and responsive user interface components. Its extensive library of pre-designed UI elements helps create a polished and professional-looking game.
 - **Service Workers**: Service workers are employed to enable offline support, ensuring that players can enjoy uninterrupted gameplay even without an active internet connection.
+- **IndexedDB**: To save data locally even offline.
 - **EditorConfig**: The project includes an EditorConfig file to maintain consistent coding styles across different editors and IDEs. This tool emphasize the importance of consistent code structure and adherence to coding standards.
 - **Git Hooks (Husky)**: Git hooks are implemented using Husky to automate tasks such as code linting and testing before commits are made, ensuring that only high-quality code is pushed to the repository.
 - **Unit Testing**: The project includes comprehensive unit tests and integration tests to ensure the reliability and stability of the application.
