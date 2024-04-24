@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test:
-    name: Tests passes
+    name: Tests pass
     runs-on: ubuntu-latest
 
     steps:
@@ -13,6 +13,9 @@ jobs:
 
       - name: 💾 Install modules
         run: npm ci
+
+      - name: 🌐 Start development server
+        run: npm start &
 
       - name: 🧪 Testing
         run: npm run ci:test
