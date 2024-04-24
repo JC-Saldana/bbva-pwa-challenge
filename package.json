@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ci:test": "npm test -- --coverage --watchAll=false"
+    "ci:test": "npm test -- --coverage --watchAll=false && npm run cypress",
+    "cypress": "cypress run"
   },
   "eslintConfig": {
     "extends": [
