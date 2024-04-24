@@ -13,6 +13,9 @@ Welcome to the BBVA Cards Game – a React application designed to test your mem
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=JC-Saldana_bbva-pwa-challenge&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=JC-Saldana_bbva-pwa-challenge)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=JC-Saldana_bbva-pwa-challenge&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=JC-Saldana_bbva-pwa-challenge)
 
+## Perfect lighthouse score
+![Alt text](/src/images/lighthouse.png?raw=true "Title")
+
 ## Live app
 Ready to test your memory skills? -> https://bbva-pwa-challenge.netlify.app/
 
