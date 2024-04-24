@@ -34,7 +34,7 @@ export default function Header(props) {
   const getMaxScore = async () => {
     const dbItems = await database.getAllItems();
     const scores = dbItems.map(item => item.score)
-    const maxScoreFromDb = Math.max(...scores) || 0
+    const maxScoreFromDb = Math.max(...scores)?.length || 0
     setMaxScore(maxScoreFromDb)
   }
 
