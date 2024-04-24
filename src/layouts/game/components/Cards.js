@@ -24,3 +24,4 @@ export default function Cards({ chosenNumber, solutionNumber, randomNumbers, cho
         </Box>
     );
 }
+
